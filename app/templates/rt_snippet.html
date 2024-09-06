@@ -1,0 +1,40 @@
+
+<div class="custom-block custom-block-transations">
+    <h5 class="mb-4">Recent Transactions</h5>
+
+    {% for transaction in user_transactions %}
+        <div class="d-flex flex-wrap align-items-center mb-4">
+            <div class="d-flex align-items-center">
+                {% if transaction.trans_type == 'Income' %}
+                    <img src="{{ url_for('static',  filename = '/images/icons/income.png')}}" class="profile-image img-fluid" alt="income img">
+                {% else %}
+                    <img src="{{ url_for('static',  filename = '/images/icons/spending-money.png')}}" class="profile-image img-fluid" alt="expense img">
+                {% endif %}
+                <div>
+                    <p>
+                        <a href="{{ url_for('main.transaction_detail', transaction_id=transaction.id) }}">
+                        {{ transaction.trans_type }}
+                        </a>
+                    </p>
+                    <small class="text-muted">C2C Transfer</small>
+                </div>
+            </div>
+
+            <div class="ms-auto">
+                <small>{{ transaction.date_added.strftime('%B %d, %Y') }}</small>
+                {% if transaction.trans_type == 'Income' %}
+                    <strong class="d-block text-success"><span class="me-1">+</span> ${{ transaction.amount }}</strong>
+                {% else %}
+                    <strong class="d-block text-danger"><span class="me-1">-</span> ${{ transaction.amount }}</strong>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="border-top pt-4 mt-4 text-center">
+        <a class="btn custom-btn" href="{{ url_for('main.wallet') }}">
+            View all transactions
+            <i class="bi-arrow-up-right-circle-fill ms-2"></i>
+        </a>
+    </div>
+</div>

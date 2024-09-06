@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+                {% block title %}AI Financial Advisor{% endblock %}
+
+                {% block content %}
+
+                    <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+                    <div class="title-group mb-3">
+                        <h1 class="h2 mb-0">Overview</h1>
+
+                        <small class="text-muted">Hello {{ current_user.first_name }}, welcome back!</small>
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-lg-7 col-12">
+
+                            {% include 'balance_snippet.html' %}
+
+                            {% include 'chart_snippet.html' %}
+
+                        </div>
+
+                        <div class="col-lg-5 col-12">
+                            <div class="custom-block custom-block-profile-front custom-block-profile text-left bg-white">
+                                <div class="custom-block-profile-image-wrap mb-4">
+                                    <img src="{{url_for('static', filename = 'images/' + current_user.profile_pic )}}" class="custom-block-profile-image img-fluid" alt="profile pic">
+
+
+                                    <a href="{{ url_for('main.settings') }}" class="bi-pencil-square custom-block-edit-icon"></a>
+                                </div>
+
+                                <p class="d-flex flex-wrap mb-2">
+                                    <strong>Name:</strong>
+
+                                    <span>{{ current_user.first_name }}</span>
+                                </p>
+
+                                <p class="d-flex flex-wrap mb-2">
+                                    <strong>Username:</strong>
+
+                                    <span>{{ current_user.username }}</span>
+                                </p>
+
+                                <p class="d-flex flex-wrap mb-2">
+                                    <strong>Email:</strong>
+
+                                    <span>
+                                        {{ current_user.email }}
+                                    </span>
+                                </p>
+
+                                <p class="d-flex flex-wrap mb-2">
+                                    <strong>Phone:</strong>
+
+                                    <span>
+                                        {{ current_user.phone }}
+                                    </span>
+                                </p>
+
+                            </div>
+
+                            {% include 'rt_snippet.html' %}
+
+                            {% include 'add_m_snippet.html' %}
+
+                        </div>
+                    </div>
+
+                {% endblock %}
