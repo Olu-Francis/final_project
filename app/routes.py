@@ -32,7 +32,7 @@ def add_user():
                 image = request.files.get('profile_pic')
                 if image and image.filename != '':
                     pic_filename = secure_filename(image.filename)
-                    pic_name = f"{uuid.uuid4()}_{pic_filename}"
+                    pic_name = f"profile/{uuid.uuid4()}_{pic_filename}"
                     image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], pic_name))
                 else:
                     pic_name = DEFAULT_PIC  # Set to a default image
@@ -177,7 +177,7 @@ def settings():
             if profile_pic_file and profile_pic_file.filename != '':
                 # Handle new profile picture upload
                 pic_filename = secure_filename(profile_pic_file.filename)
-                pic_name = str(current_user.id) + '_' + pic_filename
+                pic_name = "profile/" + str(current_user.id) + '_' + pic_filename
                 pic_path = os.path.join(current_app.config['UPLOAD_FOLDER'], pic_name)
                 profile_pic_file.save(pic_path)
                 user_to_update.profile_pic = pic_name
